@@ -22,7 +22,7 @@ public struct File {
     }
 
     public func Write(string #u8*, end #u8) {
-        self.Write(string)
+        self.Write(string);
         self.Write(end);
         return;
     }

@@ -15,8 +15,6 @@ public struct Thread {
     }
     
     public func Start() {
-        //this (the i32 type) should throw a compiler error
-        //self.pthread_id #i32 = pthread_create(self.pthread_t, self.pthread_attr_t, self.pthread_main, self.pthread_arg);
         if pthread_create(&self.pthread_t, self.pthread_attr_t, self.pthread_main, self.pthread_arg) != 0 {
             STDErr().WriteLine("Failed to start thread.");
         }
