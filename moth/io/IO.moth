@@ -1,0 +1,34 @@
+namespace core::io;
+
+public func Write(char #u8) {
+    STDOut().Write(char);
+    return;
+}
+
+public func Write(string #u8*) {
+    STDOut().Write(string);
+    return;
+}
+
+public func Write(string #u8*, end #u8) {
+    STDOut().Write(string, end);
+    return;
+}
+
+public func WriteLine(string #u8*) {
+    STDOut().WriteLine(string);
+    return;
+}
+
+public func Input(string #u8*) #u8* {
+    return Input(string, STDOut(), STDIn());
+}
+
+public func Input(string #u8*, output #File, input #File) #u8* {
+    output.Write(string, '\0');
+    return input.ReadLine();
+}
+
+public func OpenFile(path #u8*, mode #u8*) #File {
+    return #File.init(fopen(path, mode));
+}

@@ -1,0 +1,72 @@
+namespace core::io;
+
+public struct File {
+    public CFile #FILE*;
+
+    public static func init(cfile #FILE*) #File {
+        self.CFile = cfile;
+        return self;
+    }
+
+    public func Write(string #u8*) {
+        fputs(string, self.CFile);
+        fflush(self.CFile);
+        return;
+    }
+
+    public func Write(char #u8) {
+        local str #u8* = #u8*(malloc(1));
+        sprintf(str, "%c", char);
+        self.Write(str);
+        return;
+    }
+
+    public func Write(string #u8*, end #u8) {
+        self.Write(string)
+        self.Write(end);
+        return;
+    }
+
+    public func WriteLine(string #u8*) {
+        self.Write(string, '\n');
+        return;
+    }
+
+    public func GetChar() #u8 {
+        local ch #i32 = fgetc(self.CFile);
+
+        if !EOF(ch) {
+            return #u8(ch);
+        } else {
+            return '\0';
+        }
+    }
+
+    public func ReadLine() #u8* {
+        local size #u32 = 512;
+        local string #u8* = malloc(size);
+        local ch #u8;
+        local len #u32 = 0;
+
+        if string == null {
+            return string;
+        }
+
+        while (ch = self.GetChar()) != '\0' and ch != '\n' {
+            string[len] = ch;
+            ++len;
+            
+            if len >= size {
+                string = realloc(string, size += 512);
+
+                if string == null {
+                    return string;
+                }
+            }
+        }
+
+        string[++len] = '\0';
+        string = realloc(string, ++len);
+        return string;
+    }
+}
