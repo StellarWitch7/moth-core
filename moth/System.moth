@@ -1,5 +1,7 @@
 namespace core;
 
+with core::io;
+
 @TargetOS("windows")
 public func STDIn() #File {
     return #File.init(__acrt_iob_func(0));
