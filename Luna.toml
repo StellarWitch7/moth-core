@@ -1,6 +1,6 @@
 name = "mothcore"
 version = "1.0"
 type = "lib"
-root = "moth"
+root = "main"
 out = "build"
 platforms = [ "linux", "windows" ]
