@@ -2,6 +2,7 @@ namespace core::threading;
 
 with core::io;
 
+@TargetOS("linux")
 public struct Thread {
     public pthread_t #u64;
     pthread_attr_t #void*;
@@ -13,7 +14,7 @@ public struct Thread {
         self.pthread_arg = argument;
         return self;
     }
-    
+
     public func Start() {
         if pthread_create(&self.pthread_t, self.pthread_attr_t, self.pthread_main, self.pthread_arg) != 0 {
             STDErr().WriteLine("Failed to start thread.");
