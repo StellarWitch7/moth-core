@@ -2,36 +2,6 @@ namespace core;
 
 with core::io;
 
-@TargetOS("windows")
-public func STDIn() #File {
-    return #File.init(__acrt_iob_func(0));
-}
-
-@TargetOS("windows")
-public func STDOut() #File {
-    return #File.init(__acrt_iob_func(1));
-}
-
-@TargetOS("windows")
-public func STDErr() #File {
-    return #File.init(__acrt_iob_func(2));
-}
-
-@TargetOS("linux")
-public func STDIn() #File {
-    return #File.init(stdin);
-}
-
-@TargetOS("linux")
-public func STDOut() #File {
-    return #File.init(stdout);
-}
-
-@TargetOS("linux")
-public func STDErr() #File {
-    return #File.init(stderr);
-}
-
 @TargetOS("linux")
 public func Exit() {
     pthread_exit(null);
