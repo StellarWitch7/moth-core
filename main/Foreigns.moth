@@ -4,13 +4,6 @@ foreign func malloc(size #u64) #void*;
 foreign func realloc(ptr #void*, size #u64) #void*;
 foreign func free(pointer #void*) #void;
 
-@TargetOS("linux")
-foreign func pthread_create(pthread_t #u64*, attr #void*, start_routine #(#void*) #void*, arg #void*) #i32;
-@TargetOS("linux")
-foreign func pthread_join(pthread_t #u64, retval #void**) #i32;
-@TargetOS("linux")
-foreign func pthread_exit(value_ptr #void*);
-
 foreign func printf(text #u8*, ...) #i32;
 foreign func sprintf(destination #u8*, format #u8*, ...) #i32;
 foreign func fflush(stream #FILE*) #i32;
@@ -20,9 +13,19 @@ foreign func fgetc(file #FILE*) #i32;
 foreign func fopen(path #u8*, mode #u8*) #FILE*;
 foreign func strcpy(destination #u8*, source #u8*) #u8*;
 
+@TargetOS("linux")
+foreign func pthread_create(pthread_t #u64*, attr #void*, start_routine #(#void*) #void*, arg #void*) #i32;
+@TargetOS("linux")
+foreign func pthread_join(pthread_t #u64, retval #void**) #i32;
+@TargetOS("linux")
+foreign func pthread_exit(value_ptr #void*);
+
+@TargetOS("windows")
+foreign func CreateThread(lpThreadAttributes #void*, dwStackSize #u64,
+    lpStartAddress #(#void*) #u32, lpParameter #void*,
+    dwCreationFlags #u32, lpThreadId #u32*) #void*;
+
 foreign struct FILE;
-//foreign struct pthread_t;
-//foreign struct pthread_attr_t;
 
 @TargetOS("windows")
 @CallConv("cdecl")
