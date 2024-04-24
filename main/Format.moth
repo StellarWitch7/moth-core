@@ -1,0 +1,64 @@
+namespace core;
+
+public func Format(format #u8*, val #void*) #u8* {
+    return null;
+}
+
+// you must free the result if result is non-null.
+public func Replace(orig #u8*, rep #u8*, _with #u8*) #u8* {
+    local result #u8*;     // the return string
+    local ins #u8*;        // the next insert point
+    local tmp #u8*;        // varies
+    local len_rep #i32;    // length of rep (the string to remove)
+    local len_with #i32;   // length of _with (the string to replace rep with)
+    local len_front #i32;  // distance between rep and end of last rep
+    local count #i32;      // number of replacements
+
+    // sanity checks and initialization
+    if orig == null or rep == null {
+        return null;
+    }
+
+    len_rep = strlen(rep);
+
+    if len_rep == 0 {
+        return null; // empty rep causes infinite loop during count
+    }
+
+    if _with == null {
+        _with = "";
+    }
+
+    len_with = strlen(_with);
+
+    // count the number of replacements needed
+    ins = orig;
+    count = 0;
+
+    while (tmp = strstr(ins, rep)) != null {
+        ins = tmp + len_rep;
+        ++count;
+    }
+
+    tmp = result = malloc(strlen(orig) + (len_with - len_rep) * count + 1);
+
+    if result == null {
+        return null;
+    }
+
+    // first time through the loop, all the variable are set correctly
+    // from here on,
+    //    tmp points to the end of the result string
+    //    ins points to the next occurrence of rep in orig
+    //    orig points to the remainder of orig after "end of rep"
+    while --count > 0 {
+        ins = strstr(orig, rep);
+        len_front = ins - orig;
+        tmp = strncpy(tmp, orig, len_front) + len_front;
+        tmp = strcpy(tmp, _with) + len_with;
+        orig += len_front + len_rep; // move to next "end of rep"
+    }
+
+    strcpy(tmp, orig);
+    return result;
+}

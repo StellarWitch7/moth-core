@@ -8,10 +8,14 @@ foreign func printf(text #u8*, ...) #i32;
 foreign func sprintf(destination #u8*, format #u8*, ...) #i32;
 foreign func fflush(stream #FILE*) #i32;
 foreign func fputs(string #u8*, stream #FILE*) #i32;
+foreign func fputc(char #u8, stream #FILE*) #i32;
 foreign func fgets(str #u8*, n #i32, stream #FILE*) #u8*;
 foreign func fgetc(file #FILE*) #i32;
 foreign func fopen(path #u8*, mode #u8*) #FILE*;
+
 foreign func strcpy(destination #u8*, source #u8*) #u8*;
+foreign func strlen(str #u8*) #i32;
+foreign func strstr(haystack #u8*, needle #u8*) #u8*;
 
 @TargetOS("linux")
 foreign func pthread_create(pthread_t #u64*, attr #void*, start_routine #(#void*) #void*, arg #void*) #i32;

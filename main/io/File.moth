@@ -8,16 +8,18 @@ public struct File {
         return self;
     }
 
-    public func Write(string #u8*) {
-        fputs(string, self.CFile);
+    public func Flush() {
         fflush(self.CFile);
         return;
     }
 
+    public func Write(string #u8*) {
+        fputs(string, self.CFile);
+        return;
+    }
+
     public func Write(char #u8) {
-        local str #u8* = #u8*(malloc(1));
-        sprintf(str, "%c", char);
-        self.Write(str);
+        fputc(char, self.CFile);
         return;
     }
 
