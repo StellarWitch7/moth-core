@@ -42,7 +42,7 @@ public struct Thread {
     winthread_main #(#void*) #u32;
     winthread_arg #void*;
 
-    public static func init(main #(#void*) #u32, argument #void* #Thread {
+    public static func init(main #(#void*) #u32, argument #void*) #Thread {
         self.winthread_main = main;
         self.winthread_arg = arg;
         return self;
