@@ -1,35 +1,35 @@
 namespace core::io;
 
 @TargetOS("windows")
-public func STDIn() #File {
-    return #File.init(__acrt_iob_func(0));
+pub fn STDIn() #File {
+    ret #File.init(__acrt_iob_func(0))
 }
 
 @TargetOS("windows")
-public func STDOut() #File {
-    return #File.init(__acrt_iob_func(1));
+pub fn STDOut() #File {
+    ret #File.init(__acrt_iob_func(1))
 }
 
 @TargetOS("windows")
-public func STDErr() #File {
-    return #File.init(__acrt_iob_func(2));
+pub fn STDErr() #File {
+    ret #File.init(__acrt_iob_func(2))
 }
 
 @TargetOS("linux")
-public func STDIn() #File {
-    return #File.init(stdin);
+pub fn STDIn() #File {
+    ret #File.init(stdin)
 }
 
 @TargetOS("linux")
-public func STDOut() #File {
-    return #File.init(stdout);
+pub fn STDOut() #File {
+    ret #File.init(stdout)
 }
 
 @TargetOS("linux")
-public func STDErr() #File {
-    return #File.init(stderr);
+pub fn STDErr() #File {
+    ret #File.init(stderr)
 }
 
-public func OpenFile(path #u8*, mode #u8*) #File {
-    return #File.init(fopen(path, mode));
+pub fn OpenFile(path #u8*, mode #u8*) #File {
+    ret #File.init(fopen(path, mode))
 }

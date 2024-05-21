@@ -3,40 +3,40 @@ namespace core;
 with core::io;
 
 @TargetOS("linux")
-public func Exit() {
+pub fn Exit() {
     pthread_exit(null);
-    return;
+    ret
 }
 
-public func EOF(ch #i32) #bool {
-    return ch < 0;
+pub fn EOF(ch #i32) #bool {
+    ret ch < 0
 }
 
-public func Write(char #u8) {
+pub fn Write(char #u8) {
     STDOut().Write(char);
-    return;
+    ret
 }
 
-public func Write(string #u8*) {
+pub fn Write(string #u8*) {
     STDOut().Write(string);
-    return;
+    ret
 }
 
-public func Write(string #u8*, end #u8) {
+pub fn Write(string #u8*, end #u8) {
     STDOut().Write(string, end);
-    return;
+    ret
 }
 
-public func WriteLine(string #u8*) {
+pub fn WriteLine(string #u8*) {
     STDOut().WriteLine(string);
-    return;
+    ret
 }
 
-public func Input(string #u8*) #u8* {
-    return Input(string, STDOut(), STDIn());
+pub fn Input(string #u8*) #u8* {
+    ret Input(string, STDOut(), STDIn())
 }
 
-public func Input(string #u8*, output #File, input #File) #u8* {
+pub fn Input(string #u8*, output #File, input #File) #u8* {
     output.Write(string, '\0');
-    return input.ReadLine();
+    ret input.ReadLine()
 }

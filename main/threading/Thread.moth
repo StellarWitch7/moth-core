@@ -3,56 +3,56 @@ namespace core::threading;
 with core::io;
 
 @TargetOS("linux")
-public struct Thread {
-    public pthread_t #u64;
+pub type Thread {
+    pub pthread_t #u64;
     pthread_attr_t #void*;
     pthread_main #(#void*) #void*;
     pthread_arg #void*;
 
-    public static func init(main #(#void*) #void*, argument #void*) #Thread {
+    pub static fn init(main #(#void*) #void*, argument #void*) #Thread {
         self.pthread_main = main;
         self.pthread_arg = argument;
-        return self;
+        ret self
     }
 
-    public func Start() {
+    pub fn Start() {
         if pthread_create(&self.pthread_t, self.pthread_attr_t, self.pthread_main, self.pthread_arg) != 0 {
             STDErr().WriteLine("Failed to start POSIX thread.");
         }
 
-        return;
+        ret
     }
 
-    public func Join() {
-        local ret #void*;
+    pub fn Join() {
+        var returnVal #void*;
 
-        if pthread_join(self.pthread_t, &ret) != 0 {
+        if pthread_join(self.pthread_t, &returnVal) != 0 {
             STDErr().WriteLine("Failed to join POSIX thread.");
         }
 
-        return;
+        ret
     }
 }
 
 @TargetOS("windows")
-public struct Thread {
+pub type Thread {
     winthread_handle #void*;
     winthread_lpThreadId #u32*;
     winthread_lpThreadAttributes #void*;
     winthread_main #(#void*) #u32;
     winthread_arg #void*;
 
-    public static func init(main #(#void*) #u32, argument #void*) #Thread {
+    pub static fn init(main #(#void*) #u32, argument #void*) #Thread {
         self.winthread_main = main;
         self.winthread_arg = arg;
-        return self;
+        ret self
     }
 
-    public func Start() {
+    pub fn Start() {
         if winthread_handle = CreateThread(winthread_lpThreadAttributes, 0, winthread_main, winthread_arg, 0, winthread_lpThreadId) == null {
             STDErr().WriteLine("Failed to start Windows thread.");
         }
         
-        return;
+        ret
     }
 }
