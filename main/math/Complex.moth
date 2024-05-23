@@ -1,0 +1,6 @@
+namespace core::math;
+
+pub type Complex<T> {
+    pub Normal ?T;
+    pub Imaginary ?T;
+}

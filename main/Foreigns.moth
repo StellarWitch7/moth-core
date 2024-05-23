@@ -29,7 +29,7 @@ foreign fn CreateThread(lpThreadAttributes #void*, dwStackSize #u64,
     lpStartAddress #(#void*) #u32, lpParameter #void*,
     dwCreationFlags #u32, lpThreadId #u32*) #void*;
 
-foreign type FILE;
+type FILE;
 
 @TargetOS("windows")
 @CallConv("cdecl")
