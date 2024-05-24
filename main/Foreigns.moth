@@ -36,10 +36,10 @@ type FILE;
 foreign fn __acrt_iob_func(n #u32) #FILE*;
 
 @TargetOS("linux")
-foreign stdin #FILE*;
+foreign global stdin #FILE*;
 
 @TargetOS("linux")
-foreign stdout #FILE*;
+foreign global stdout #FILE*;
 
 @TargetOS("linux")
-foreign stderr #FILE*;
+foreign global stderr #FILE*;
