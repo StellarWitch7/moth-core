@@ -1,0 +1,2 @@
+[env]
+glibc = "__SILK_INCLUDE_GLIBC"
