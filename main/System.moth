@@ -2,6 +2,7 @@ namespace core;
 
 with core::io;
 
+@Export
 @TargetOS("linux")
 pub fn Exit() {
     pthread_exit(null);

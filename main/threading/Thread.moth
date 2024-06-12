@@ -2,19 +2,22 @@ namespace core::threading;
 
 with core::io;
 
+@Export
 @TargetOS("linux")
 pub type Thread {
     pub pthread_t #u64;
     pthread_attr_t #void*;
-    pthread_main #(#void*) #void*;
     pthread_arg #void*;
+    pthread_main #(#void*) #void*;
 
+    @Export
     pub static fn init(main #(#void*) #void*, argument #void*) #Thread {
         self.pthread_main = main;
         self.pthread_arg = argument;
         ret self
     }
 
+    @Export
     pub fn Start() {
         if pthread_create(&self.pthread_t, self.pthread_attr_t, self.pthread_main, self.pthread_arg) != 0 {
             STDErr().WriteLine("Failed to start POSIX thread.");
@@ -23,6 +26,7 @@ pub type Thread {
         ret
     }
 
+    @Export
     pub fn Join() {
         var returnVal #void*;
 

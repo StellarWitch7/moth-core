@@ -1,6 +1,7 @@
 name = "mothcore"
-version = "1.0"
+version = "1.0.0"
 type = "lib"
 root = "main"
 out = "build"
-platforms = [ "linux", "windows" ]
+target-platforms = [ "linux", "windows" ]
+target-languages = [ "c" ]
